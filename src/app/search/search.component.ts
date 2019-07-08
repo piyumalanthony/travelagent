@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { SearchService } from '../search.service';
 
 @Component({
   selector: 'app-search',
@@ -9,7 +11,8 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 export class SearchComponent implements OnInit {
 
   searchForm: FormGroup;
-  constructor(private fb:FormBuilder) { }
+  public result:Object;
+  constructor(private fb:FormBuilder,private http: HttpClient,private searchService:SearchService) { }
 
   ngOnInit() {
     this.searchForm= this.fb.group({
@@ -49,6 +52,11 @@ export class SearchComponent implements OnInit {
 
   submitHandler(){
     console.log(this.searchForm.value);
+    this.searchService.searchReservation(this.searchForm.value).subscribe(res=>{
+      console.log("submitted values!!!")
+      this.result=res;
+      console.log(this.result);
+    })
     
   }
 

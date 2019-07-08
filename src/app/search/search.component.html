@@ -128,3 +128,35 @@
     </form>
   </div>
 </div>
+
+
+
+<br>
+<table *ngIf="result">
+  <tr>
+    <th>Index</th>
+    <th>Hotel name</th>
+    <th>Room type</th>
+    <th>No. of Adults</th>
+    <th>No. Of Rooms required</th>
+    <th>Availability</th>
+    <th>Price per room</th>
+    <th>No.of rooms available</th>
+    <th>Total price</th>
+    
+
+  </tr>
+  <tr *ngFor="let obj of result">
+    <td>{{obj.searchIndex}}</td>
+    <td>{{obj.hotel_name}}</td>
+    <td>{{obj.room_types}}</td>
+    <td>{{obj.noOfAdults}}</td>
+    <td>{{obj.noOfRoomsRequired}}</td>
+    <td>{{obj.posibility}}</td>
+    <td>{{obj.price}}</td>
+    <td>{{obj.noOfAvailbleRooms}}</td>
+    <td>{{obj.totalPrice}}</td>
+    
+  </tr>
+  
+</table>

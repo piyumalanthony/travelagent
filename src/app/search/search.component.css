@@ -26,3 +26,41 @@
 .control-buttons img {
     cursor: pointer;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul li {
+    background: #eee;
+    padding: 2em;
+    border-radius: 4px;
+    margin-bottom: 7px;
+    display: grid;
+    grid-template-columns: 60px auto;
+  }
+  ul li p {
+    font-weight: bold;
+    margin-left: 20px;
+  }
+  ul li img {
+    border-radius: 50%;
+    width: 100%;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

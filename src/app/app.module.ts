@@ -9,6 +9,7 @@ import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchContractsComponent } from './search-contracts/search-contracts.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AddContractComponent,
     SearchComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    SearchContractsComponent
   ],
   imports: [
     BrowserModule,
