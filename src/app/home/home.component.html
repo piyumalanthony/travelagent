@@ -1,0 +1,8 @@
+<h1>Hotels under contract</h1>
+
+<ul *ngIf="hotels">
+  <li *ngFor="let hotel of hotels">
+      <span class="badge">{{hotel.name}}</span> 
+      <span class="badge">{{hotel.location}}</span>
+  </li>
+</ul>

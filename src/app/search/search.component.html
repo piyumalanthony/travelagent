@@ -1,0 +1,70 @@
+<div style="padding-right:15px;" class="container-fluid">
+
+    <!-- form header -->
+    <div class="row">
+      <div class="col">
+        <h1>Search for Hotels</h1>
+        <hr>
+      </div>
+    </div>
+  
+    <!-- main form -->
+    <!-- main form -->
+  <div class="row">
+      <form action="" style="width:100%;" [formGroup]="searchForm">
+        <div class="col">
+  
+          <!-- form inputs-->
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="fnText">Location</label>
+                <input required type="text" 
+                formControlName="location"
+                class="form-control" id="fnText" placeholder="Enter Hotel location">
+                <small id="fnHelp" *ngIf="searchForm.controls.location.errors?.required && searchForm.controls.location.touched"class="form-text custom-invalid-feedback">Field is required</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="lnText">check In Date</label>
+                <input required type="date" 
+                formControlName="checkInDate"
+                class="form-control" id="lnText" placeholder="Enter check in date">
+                <small id="fnHelp" *ngIf="searchForm.controls.checkInDate.errors?.required && searchForm.controls.checkInDate.touched" class="form-text custom-invalid-feedback">Field is required</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="lnText">No. Of Nights</label>
+                <input required type="number" 
+                formControlName="noOfNights"
+                class="form-control" id="lnText" placeholder="Enter number of nights">
+                <small id="fnHelp" *ngIf="searchForm.controls.noOfNights.errors?.required && searchForm.controls.noOfNights.touched" class="form-text custom-invalid-feedback">Field is required</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="lnText">No. Of Adults</label>
+                <input required type="number" 
+                formControlName="noOfAdults"
+                class="form-control" id="lnText" placeholder="Enter nuber of adults">
+                <small id="fnHelp" *ngIf="searchForm.controls.noOfAdults.errors?.required && searchForm.controls.noOfAdults.touched" class="form-text custom-invalid-feedback">Field is required</small>
+              </div>
+            </div>
+            
+          </div>
+  
+  
+         
+  
+          <!-- final action buttons -->
+          <div class="row justify-content-center">
+            <div class="col-2">
+              <button type="button" [disabled]="!searchForm.valid" (click)="searchHandler()" class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

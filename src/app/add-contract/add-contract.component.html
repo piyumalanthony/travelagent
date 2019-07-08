@@ -1,0 +1,170 @@
+<div style="padding-right:15px;" class="container-fluid">
+
+  <!-- form header -->
+  <div class="row">
+    <div class="col">
+      <h1>Add New Contract</h1>
+      <hr>
+    </div>
+  </div>
+
+  <!-- main form -->
+  <div class="row">
+    <form action="" style="width:100%;" [formGroup]="nestedForm">
+      <div class="col">
+
+        <!-- personal info -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="fnText">Hotel Name</label>
+              <input required type="text" 
+              formControlName="name"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': nestedForm.controls.name.invalid && nestedForm.controls.name.touched,
+                      'is-valid': nestedForm.controls.name.valid}" id="hotelname" placeholder="Enter Hotel name">
+              <small id="fnHelp" *ngIf="nestedForm.controls.name.errors?.required && nestedForm.controls.name.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="lnText">Location</label>
+              <input required type="text" 
+              formControlName="location"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': nestedForm.controls.location.invalid && nestedForm.controls.location.touched,
+                      'is-valid': nestedForm.controls.location.valid}" id="location" placeholder="Enter location">
+              <small id="fnHelp"  *ngIf="nestedForm.controls.name.errors?.required && nestedForm.controls.location.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="lnText">Valid From:</label>
+              <input required type="date" 
+              formControlName="s_date"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': nestedForm.controls.s_date.invalid && nestedForm.controls.s_date.touched,
+                      'is-valid': nestedForm.controls.s_date.valid}" id="s_date" placeholder="Enter contract starting date">
+              <small id="fnHelp" *ngIf="nestedForm.controls.s_date.errors?.required && nestedForm.controls.s_date.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="lnText">Valid To:</label>
+              <input required type="date" 
+              formControlName="e_date"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': nestedForm.controls.e_date.invalid && nestedForm.controls.e_date.touched,
+                      'is-valid': nestedForm.controls.e_date.valid}" id="lnText" placeholder="Enter contract ending data">
+              <small id="fnHelp" *ngIf="nestedForm.controls.e_date.errors?.required && nestedForm.controls.e_date.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="lnText">MarkUp</label>
+              <input required type="number" 
+              formControlName="markup"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': nestedForm.controls.markup.invalid && nestedForm.controls.markup.touched,
+                      'is-valid': nestedForm.controls.markup.valid}" id="lnText" placeholder="Enter markup of the contract">
+              <small id="fnHelp" *ngIf="nestedForm.controls.markup.errors?.required && nestedForm.controls.markup.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+          
+        </div>
+
+
+        <!-- seperator -->
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+
+
+        <!-- room type form portion -->
+        <div class="row" formArrayName ="room_type" >
+          <div class="col-12" *ngFor ="let group of roomTypeArray.controls;let i =index;" [formGroupName]="i">
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-8">
+                    <h4>Room Type {{i+1}} </h4>
+                  </div>
+                  <div class="col-4 control-buttons">
+                    <img src="/assets/icons/add.svg" alt="" (click)="addRoomType()">
+                    <img src="/assets/icons/remove.svg" alt="" width="24" height="24" (click)="removeRoomType(i)">
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="room_type">Room Type:</label>
+                  <input required type="text" 
+                  formControlName="room_type_name"
+                  [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.room_type_name.invalid && group.controls.room_type_name.touched,
+                      'is-valid': group.controls.room_type_name.valid}" id="addText" placeholder="Enter room type">
+                  <small  *ngIf="group.controls.room_type_name.errors?.required && group.controls.room_type_name.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="price">Price</label>
+                      <input required type="number" 
+                      formControlName="price"
+                      [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.price.invalid && group.controls.price.touched,
+                      'is-valid': group.controls.price.valid}"
+                       id="price" placeholder="Enter price per room">
+                      <small *ngIf="group.controls.price.errors?.required && group.controls.price.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                    </div>
+                  </div>
+                  <div class="col">
+                      <div class="form-group">
+                        <label for="noOfRooms">No. of Rooms</label>
+                        <input required type="number" 
+                        formControlName="no_of_rooms"
+                        [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.no_of_rooms.invalid && group.controls.no_of_rooms.touched,
+                      'is-valid': group.controls.no_of_rooms.valid}" id="no_of_rooms" placeholder="Enter no. of rooms">
+                        <small *ngIf="group.controls.no_of_rooms.errors?.required && group.controls.no_of_rooms.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                      </div>
+                    </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="no_of_adults">Max No. of Adults</label>
+                      <input required type="number" 
+                      formControlName="no_of_adults"
+                      [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.no_of_adults.invalid && group.controls.no_of_adults.touched,
+                      'is-valid': group.controls.no_of_adults.valid}" id="no_of_adults" placeholder="Enter no. of adults">
+                      <small  *ngIf="group.controls.no_of_adults.errors?.required && group.controls.no_of_adults.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- seperator -->
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+
+        <!-- final action buttons -->
+        <div class="row justify-content-center">
+          <div class="col-2">
+            <button type="button" [disabled]="!nestedForm.valid" (click)="submitHandler()" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
