@@ -69,7 +69,9 @@ export class AddContractComponent implements OnInit {
 
   submitHandler(){
     //console.log(this.nestedForm.value);
-    return this.http.post(this._url,this.nestedForm);
+    this.contractServie.addNewContract(this.nestedForm.value).subscribe(res=>{
+      console.log("New Contract Created!!!")
+    })
   }
 
 }

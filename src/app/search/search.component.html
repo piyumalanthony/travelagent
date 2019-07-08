@@ -1,70 +1,130 @@
 <div style="padding-right:15px;" class="container-fluid">
 
-    <!-- form header -->
-    <div class="row">
-      <div class="col">
-        <h1>Search for Hotels</h1>
-        <hr>
-      </div>
-    </div>
-  
-    <!-- main form -->
-    <!-- main form -->
+  <!-- form header -->
   <div class="row">
-      <form action="" style="width:100%;" [formGroup]="searchForm">
-        <div class="col">
-  
-          <!-- form inputs-->
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <label for="fnText">Location</label>
-                <input required type="text" 
-                formControlName="location"
-                class="form-control" id="fnText" placeholder="Enter Hotel location">
-                <small id="fnHelp" *ngIf="searchForm.controls.location.errors?.required && searchForm.controls.location.touched"class="form-text custom-invalid-feedback">Field is required</small>
-              </div>
+    <div class="col">
+      <h1>Search for reservations</h1>
+      <hr>
+    </div>
+  </div>
+
+  <!-- main form -->
+  <div class="row">
+    <form action="" style="width:100%;" [formGroup]="searchForm">
+      <div class="col">
+
+        <!-- personal info -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="fnText">Location</label>
+              <input required type="text" 
+              formControlName="location"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': searchForm.controls.location.invalid && searchForm.controls.location.touched,
+                      'is-valid': searchForm.controls.location.valid}" id="location" placeholder="Enter location">
+              <small id="fnHelp" *ngIf="searchForm.controls.location.errors?.required && searchForm.controls.location.touched" class="form-text custom-invalid-feedback">Field is required</small>
             </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="lnText">check In Date</label>
-                <input required type="date" 
-                formControlName="checkInDate"
-                class="form-control" id="lnText" placeholder="Enter check in date">
-                <small id="fnHelp" *ngIf="searchForm.controls.checkInDate.errors?.required && searchForm.controls.checkInDate.touched" class="form-text custom-invalid-feedback">Field is required</small>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="lnText">No. Of Nights</label>
-                <input required type="number" 
-                formControlName="noOfNights"
-                class="form-control" id="lnText" placeholder="Enter number of nights">
-                <small id="fnHelp" *ngIf="searchForm.controls.noOfNights.errors?.required && searchForm.controls.noOfNights.touched" class="form-text custom-invalid-feedback">Field is required</small>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="lnText">No. Of Adults</label>
-                <input required type="number" 
-                formControlName="noOfAdults"
-                class="form-control" id="lnText" placeholder="Enter nuber of adults">
-                <small id="fnHelp" *ngIf="searchForm.controls.noOfAdults.errors?.required && searchForm.controls.noOfAdults.touched" class="form-text custom-invalid-feedback">Field is required</small>
-              </div>
-            </div>
-            
           </div>
-  
-  
+          <div class="col-6">
+            <div class="form-group">
+              <label for="lnText">Check in date</label>
+              <input required type="date" 
+              formControlName="checkInDate"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': searchForm.controls.checkInDate.invalid && searchForm.controls.checkInDate.touched,
+                      'is-valid': searchForm.controls.checkInDate.valid}" id="checkInDate" placeholder="Enter check in date">
+              <small id="fnHelp"  *ngIf="searchForm.controls.checkInDate.errors?.required && searchForm.controls.checkInDate.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="noOfNights">No of nights:</label>
+              <input required type="number" 
+              formControlName="noOfNights"
+              [ngClass]="{'form-control': true,
+                      'is-invalid': searchForm.controls.noOfNights.invalid && searchForm.controls.noOfNights.touched,
+                      'is-valid': searchForm.controls.noOfNights.valid}" id="noOfNights" placeholder="Enter contract number of nights">
+              <small id="fnHelp" *ngIf="searchForm.controls.noOfNights.errors?.required && searchForm.controls.noOfNightstouched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
          
-  
-          <!-- final action buttons -->
-          <div class="row justify-content-center">
-            <div class="col-2">
-              <button type="button" [disabled]="!searchForm.valid" (click)="searchHandler()" class="btn btn-primary">Search</button>
+          
+          
+        </div>
+
+
+        <!-- seperator -->
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+
+
+        <!-- room type form portion -->
+        <div class="row" formArrayName ="room_details" >
+          <div class="col-12" *ngFor ="let group of roomDetailsArray.controls;let i =index;" [formGroupName]="i">
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-8">
+                    <h4>Room Type {{i+1}} </h4>
+                  </div>
+                  <div class="col-4 control-buttons">
+                    <img src="/assets/icons/add.svg" alt="" (click)="addRoomDetails()">
+                    <img src="/assets/icons/remove.svg" alt="" width="24" height="24" (click)="removeRoomDetails(i)">
+                  </div>
+                </div>
+                <hr>
+              </div>
+              
+              <div class="col-12">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="noOfRooms">No. Of Rooms</label>
+                      <input required type="number" 
+                      formControlName="noOfRooms"
+                      [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.noOfRooms.invalid && group.controls.noOfRooms.touched,
+                      'is-valid': group.controls.noOfRooms.valid}"
+                       id="price" placeholder="Enter number of rooms">
+                      <small *ngIf="group.controls.noOfRooms.errors?.required && group.controls.noOfRooms.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                    </div>
+                  </div>
+                  
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="no_of_adults">No. of Adults</label>
+                      <input required type="number" 
+                      formControlName="noOfAdults"
+                      [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.noOfAdults.invalid && group.controls.noOfAdults.touched,
+                      'is-valid': group.controls.noOfAdults.valid}" id="noOfAdults" placeholder="Enter no. of adults">
+                      <small  *ngIf="group.controls.noOfAdults.errors?.required && group.controls.noOfAdults.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </form>
-    </div>
+
+        <!-- seperator -->
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+
+        <!-- final action buttons -->
+        <div class="row justify-content-center">
+          <div class="col-2">
+            <button type="button" [disabled]="!searchForm.valid" (click)="submitHandler()" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
+</div>
